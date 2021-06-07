@@ -1,0 +1,53 @@
+.cardContainer {
+  padding: 10px;
+  width: 50%;
+  max-width: 450px;
+}
+.cardContainer .title {
+  margin-left: 10px;
+  color: white;
+}
+.card {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  height: 350px;
+}
+.question {
+  font-size: 17px;
+  font-weight: bolder;
+  color: rgb(44, 59, 106);
+  margin: 0px;
+}
+.answers {
+  margin-top: 5px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.answers button {
+  width: 100%;
+  height: 16%;
+  text-align: left;
+  border: 2px rgb(80, 107, 190) solid;
+  color: rgb(80, 107, 190);
+  background: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.answers button:hover {
+  background-color: #ff6404;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.answers button span {
+  width: 30px;
+  margin-left: 6px;
+  margin-right: 50px;
+}
