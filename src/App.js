@@ -1,4 +1,5 @@
 import './App.css';
+
 import QuizCard from './components/QuizCard';
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
       country1="Malardo"
       country2="Buenardo" 
       country3="Petardo" 
-      country4="Sacaracatunga"/>
+      country4="Sacaracatunga"
+      correctCountry={"Petardo"}/>
     </div>
   );
 }
