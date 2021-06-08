@@ -34,10 +34,11 @@
   align-items: center;
   color: #ffa304;
   border: 2px white solid;
-  top: -55px;
-  width: 70px;
-  height: 70px;
-  font-size: 70px;
+  top: -40px;
+  right: 2px;
+  width: 50px;
+  height: 50px;
+  font-size: 50px;
   background: rgb(65, 83, 155);
   border-radius: 60px;
   padding: 2px;
@@ -76,6 +77,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  transition: 200ms;
 }
 .next {
   background: #ffa304;
@@ -86,6 +88,9 @@
   color: white;
   border-radius: 10px;
 }
+.retry {
+  background: rgb(255, 0, 0);
+}
 .next:hover {
   opacity: 0.9;
   cursor: pointer;
@@ -95,9 +100,11 @@
   background: rgb(81, 250, 121);
   border: rgb(81, 250, 121);
   color: white;
+  transition: 200ms;
 }
 .answers .incorrect {
   background: rgb(246, 61, 61);
   border: rgb(246, 61, 61);
   color: white;
+  transition: 200ms;
 }

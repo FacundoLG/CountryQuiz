@@ -1,41 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import '../Themes/whiteTheme.css'
 
-const QuizCard = ({capital,country1,country2,country3,country4,correctCountry}) => {
-    var [counter, setCounter] = useState(0)
-    var [isCorrect,setIsCorrect] = useState(false)  
-    useEffect(()=>{
-        //Styles Reset
-    })   
-    const removeHover = (id) =>{
-        document.getElementById(id).classList.remove("buttonhov")
+
+const QuizCard = ({ capital,
+                    country1,
+                    country2,
+                    country3,
+                    country4,
+                    correctCountry,
+                    counter,
+                    next,
+                    reset 
+}) => {
+    var [isFinished,setIsFinished] = useState(false)   
+    var [isCorrect,setIsCorrect] = useState(false)   
+    
+    
+    const toggleHover = (ids) =>{
+        for (const id of ids) {
+            document.getElementById(id).classList.toggle("buttonhov")
+        }
     }
+
     const choseAnswer = (e) => {
         var selected = e.target.id
         
-        removeHover(country1)
-        removeHover(country2)
-        removeHover(country3)
-        removeHover(country4)
+        toggleHover([country1,country2,country3,country4])  
         
         if(selected === correctCountry){
             setIsCorrect(true)
-            setCounter(counter += 1)
-            removeHover(country1)
-            removeHover(country2)
-            removeHover(country3)
-            removeHover(country4)
+
             document.getElementById(selected).classList.add("correct")
+        
         }else{
             setIsCorrect(false)
-            setCounter(0)
-            document.getElementById(selected).classList.remove("buttonhov")
+            document.getElementById(correctCountry).classList.add("correct")
             document.getElementById(selected).classList.add("incorrect")
         }
-        console.log(isCorrect)
-        
+        setIsFinished(true)        
     }
-    
+    const nextQuestion = () =>{
+        resetStyles()
+        next()
+    }
+
+    const Retry = () =>{
+        resetStyles()
+        setIsFinished(false)
+        reset()
+    }
+
+    const resetStyles = () =>{
+        if(document.getElementById(correctCountry).classList.contains("correct")){
+            document.getElementById(correctCountry).classList.remove("correct")
+        }
+        for(var id of [country1,country2,country3,country4]){
+            if(document.getElementById(id).classList.contains("incorrect")){
+                document.getElementById(id).classList.remove("incorrect")
+            }
+        }
+        toggleHover([country1,country2,country3,country4])  
+    }
     
     return ( 
         <div className="cardContainer">
@@ -51,10 +76,15 @@ const QuizCard = ({capital,country1,country2,country3,country4,correctCountry}) 
                     <button type="button" className="buttonhov" onClick={choseAnswer} id={country3}> <span>C </span>{country3}</button>
                     <button type="button" className="buttonhov" onClick={choseAnswer} id={country4}> <span>D </span>{country4}</button>
                 </div>
-                {isCorrect ? 
+                {isCorrect? 
                 <div className="buttonContainer">
-                    <button type="button" className="next">Next</button>
-                </div>: ""}
+                    <button type="button" className="next" onClick={nextQuestion}>Next</button>
+                </div>:""}
+                {isCorrect === false && isFinished?
+                <div className="buttonContainer">
+                    <button type="button" className="next retry" onClick={Retry}>Retry</button>
+                </div>: ""
+                }
             </div>
         </div>
      );
