@@ -4,45 +4,51 @@ import QuizCard from './components/QuizCard';
 
 function App() {
   var [counter, setCounter] = useState(0)
-  var [quizData,setQuizData] = useState([])
+  var [quizData,setQuizData] = useState([{}])
+  var [correct, setCorrect] = useState({})
+  var [retry, setRetry] = useState(0)
   const nextCard = () =>{
     setCounter(counter += 1)
+  }
+  const retryCard = () =>{
+    setCounter(0)
+    setRetry(retry += 1)
   }
   useEffect(()=>{
     fetch("https://restcountries.eu/rest/v2/all?fields=name;capital")
       .then(data => data.json())
       .then(data =>{
-          console.log(data)
-          setQuizData(data)
-        })
-      .then(()=>{
         var finalData = []
+
         for(var i= 0;i < 4;i++){
-          var randomCountry = Math.floor(Math.random()* quizData.length)
-          finalData.push(quizData[randomCountry])
+          var randomCountry = Math.floor(Math.random()* 250)
+          finalData.push(data[randomCountry])
         }
         setQuizData(finalData)
-        var correctAnswer = finalData[Math.floor(Math.random() * 3)]
-        console.log(correctAnswer.capital)
-        
+        setCorrect(finalData[Math.floor(Math.random() * 3)])
       })
-  },[counter,quizData])
+  },[counter,retry])
+ console.log(quizData)
+  
+
   return (
     <div className="App">
-      <QuizCard
-      //Outputs
-      next={nextCard}
-      reset={() => setCounter(0)}
-      //Inputs
-      capital="Porotero"
-      country1={quizData[0]}
-      country2={quizData[1]}
-      country3={quizData[2]}
-      country4={quizData[3]}
-      correctCountry={"Petardo"}
-      counter={counter}
-      
-      />
+      {
+        quizData[0].name && correct?
+        <QuizCard
+        //Outputs
+        next={nextCard}
+        reset={retryCard}
+        //Inputs
+        capital={correct.capital}
+        country1={quizData[0].name}
+        country2={quizData[1].name}
+        country3={quizData[2].name}
+        country4={quizData[3].name}
+        correctCountry={correct.name}
+        counter={counter}
+        />:""
+      }
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import '../Themes/whiteTheme.css'
 
 
@@ -70,12 +70,15 @@ const QuizCard = ({ capital,
                     <p className="question">{capital} is the capital of</p>
                     <p className="counter">{counter}</p>   
                 </div>                    
-                <div className="answers">
-                    <button type="button" className="buttonhov" onClick={choseAnswer} id={country1}> <span>A </span> {country1}</button>
-                    <button type="button" className="buttonhov" onClick={choseAnswer} id={country2}> <span>B </span>{country2}</button>
-                    <button type="button" className="buttonhov" onClick={choseAnswer} id={country3}> <span>C </span>{country3}</button>
-                    <button type="button" className="buttonhov" onClick={choseAnswer} id={country4}> <span>D </span>{country4}</button>
-                </div>
+                {
+                 country1?
+                 <div className="answers">
+                     <button type="button" className="buttonhov" onClick={choseAnswer} id={country1}> <span>A </span> {country1}</button>
+                     <button type="button" className="buttonhov" onClick={choseAnswer} id={country2}> <span>B </span>{country2}</button>
+                     <button type="button" className="buttonhov" onClick={choseAnswer} id={country3}> <span>C </span>{country3}</button>
+                     <button type="button" className="buttonhov" onClick={choseAnswer} id={country4}> <span>D </span>{country4}</button>
+                 </div>
+                        :""}
                 {isCorrect? 
                 <div className="buttonContainer">
                     <button type="button" className="next" onClick={nextQuestion}>Next</button>
